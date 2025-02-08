@@ -4,6 +4,8 @@ import RootLayout from "../layouts/RootLayout";
 // import { Search } from "@/pages/Search/Search";
 // import { Watch } from "@/pages/Watch/Watch";
 import { NotFound } from "../pages/NotFound/NotFound";
+import { Shorts } from "../pages/Shorts/Shorts";
+
 
 const router = createBrowserRouter([
   {
