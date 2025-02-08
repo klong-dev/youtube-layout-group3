@@ -1,3 +1,11 @@
+import Detail from "../Detail/Detail";
+
 export const Home = () => {
-  return <></>;
+  return (
+    <>
+      <div className="">
+        <Detail />
+      </div>
+    </>
+  );
 };
