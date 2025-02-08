@@ -5,7 +5,7 @@ import {
   fetchVideosFailure,
 } from "./reducers/videoSlice.jsx";
 
-const API_KEY = "AIzaSyAKuqgyHy8exJ2TC61kBt7Hvme3huiPa0A";
+const API_KEY = "";
 const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 function fetchVideosApi(params) {
