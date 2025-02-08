@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FaThumbsUp, FaThumbsDown, FaCommentAlt, FaShare } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
-import { API_KEY } from "../../apis/shorts"; // Import API Key
+import { SHORTS_API_KEY } from "../../apis/shorts"; // Import API Key
 
 export function Shorts() {
   const [shorts, setShorts] = useState([]);
@@ -48,7 +48,7 @@ export function Shorts() {
   const fetchShorts = async () => {
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&videoDuration=short&q=shorts&key=${API_KEY}`
+        `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video&videoDuration=short&q=shorts&key=${SHORTS_API_KEY}`
       );
       setShorts(response.data.items);
     } catch (error) {
