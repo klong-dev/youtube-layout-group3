@@ -10,7 +10,7 @@ import SortOutlinedIcon from "@mui/icons-material/SortOutlined";
 import { Input } from "antd";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 
 function Detail() {
   const dispatch = useDispatch();
@@ -27,9 +27,10 @@ function Detail() {
   const [edit, setEdit] = useState(false);
   const [editPosition, setEditPosition] = useState({ top: 0, left: 0 });
   const editRef = useRef(null);
+  const { videoId } = useParams();
   useEffect(() => {
-    dispatch(fetchVideos());
-  }, [dispatch]);
+    dispatch(fetchVideos({ videoId }));
+  }, [dispatch, videoId]);
 
   useEffect(() => {
     if (videos.length > 0) {
@@ -380,6 +381,38 @@ function Detail() {
         ) : (
           ""
         )}
+      </div>
+      <div className="w-[25rem] flex flex-col gap-4">
+        {videos.map((item) => (
+          <Link
+            key={item.id.videoId}
+            to={`/video/${item.id.videoId}`}
+            className="flex items-start gap-3 text-white hover:bg-[#2e2e2e] p-2 rounded-lg transition"
+          >
+            <div className="relative w-[160px] h-[90px] rounded-lg overflow-hidden">
+              <img
+                src={item.snippet.thumbnails.medium.url}
+                alt={item.snippet.title}
+                className="w-full h-full object-cover"
+              />
+              <span className="absolute bottom-1 right-1 bg-black text-white text-xs px-1 py-0.5 rounded">
+                30:11
+              </span>
+            </div>
+
+            <div className="flex flex-col justify-between w-full">
+              <p className="text-sm font-bold leading-tight">
+                {item.snippet.title}
+              </p>
+              <p className="text-gray-400 text-xs">
+                {item.snippet.channelTitle}
+              </p>
+              <p className="text-gray-400 text-xs">
+                1.5M views • 11 months ago
+              </p>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );
