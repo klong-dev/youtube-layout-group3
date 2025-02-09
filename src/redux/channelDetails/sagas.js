@@ -12,14 +12,14 @@ import {
   FETCH_CHANNEL_DETAILS_REQUEST,
 } from "./actions";
 
-const apiKey = "AIzaSyA8DPNMwMdPp98blRJZHSCzewSN14qgKpM";
-
+const apiKey = import.meta.env.VITE_API_KEY;
+const apiUrl = import.meta.env.VITE_API_URL;
 function* fetchVideos(action) {
   try {
     const { query } = action.payload; // Lấy query từ payload
 
     // Gửi yêu cầu lấy video mới mà không cần pageToken
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=13&q=${query}&key=${apiKey}`;
+    const url = `${apiUrl}/search?part=snippet&maxResults=13&q=${query}&key=${apiKey}`;
 
     const response = yield call(axios.get, url);
 
@@ -32,7 +32,7 @@ function* fetchVideos(action) {
 
     const videoDetailsResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${apiKey}`
+      `${apiUrl}/videos?part=statistics&id=${videoIds}&key=${apiKey}`
     );
 
     if (!videoDetailsResponse.data.items) {
@@ -53,9 +53,7 @@ function* fetchVideos(action) {
 
     const channelResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet&id=${channelIds.join(
-        ","
-      )}&key=${apiKey}`
+      `${apiUrl}/channels?part=snippet&id=${channelIds.join(",")}&key=${apiKey}`
     );
 
     if (!channelResponse.data.items) {
@@ -89,7 +87,7 @@ function* fetchVideoById(action) {
     // Lấy chi tiết video từ API
     const response = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${action.payload}&key=${apiKey}`
+      `${apiUrl}/videos?part=snippet,statistics&id=${action.payload}&key=${apiKey}`
     );
 
     if (!response.data.items) {
@@ -102,7 +100,7 @@ function* fetchVideoById(action) {
     // Lấy thông tin kênh để có channel avatar và số lượng subscriber
     const channelResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
+      `${apiUrl}/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`
     );
 
     if (!channelResponse.data.items) {
@@ -146,7 +144,7 @@ function* fetchChannelDetails(action) {
     // 🔹 Gọi API lấy thông tin chi tiết kênh
     const channelResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${apiKey}`
+      `${apiUrl}/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${apiKey}`
     );
 
     if (!channelResponse.data.items) {
@@ -175,7 +173,7 @@ function* fetchChannelDetails(action) {
     // 🔹 Gọi API để lấy playlist của kênh
     const playlistResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&id=${channelId}&maxResults=5&key=${apiKey}`
+      `${apiUrl}/playlistItems?part=snippet&id=${channelId}&maxResults=5&key=${apiKey}`
     );
     console.log("Day la playlist: ", playlistResponse);
     if (playlistResponse.data.items) {
@@ -191,7 +189,7 @@ function* fetchChannelDetails(action) {
     // 🔹 Gọi API search để lấy 20 video mới nhất (tạm thời lấy nhiều hơn để lọc Shorts)
     const searchResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/search?part=id,snippet&channelId=${channelId}&maxResults=20&order=date&type=video&key=${apiKey}`
+      `${apiUrl}/search?part=id,snippet&channelId=${channelId}&maxResults=20&order=date&type=video&key=${apiKey}`
     );
 
     if (!searchResponse.data.items) {
@@ -213,7 +211,7 @@ function* fetchChannelDetails(action) {
     const videoIds = videos.map((video) => video.videoId).join(",");
     const videoDetailsResponse = yield call(
       axios.get,
-      `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoIds}&key=${apiKey}`
+      `${apiUrl}/videos?part=contentDetails,statistics&id=${videoIds}&key=${apiKey}`
     );
 
     if (!videoDetailsResponse.data.items) {
