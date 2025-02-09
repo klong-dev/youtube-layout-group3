@@ -7,7 +7,7 @@ function RootLayout() {
     <div className="flex flex-col bg-[#0f0f0f] min-h-svh">
       {/* <Header /> */}
       <div className="container pt-4">
-        <div className="flex">
+        <div className="">
           {/* <Sidebar /> */}
           <Outlet />
         </div>
