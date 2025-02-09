@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   fetchVideosSuccess,
   fetchVideosFailure,
+  fetchRecommendedVideosSuccess,
 } from "./reducers/videoSlice.jsx";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -10,6 +11,18 @@ const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 function fetchVideosApi(params) {
   return axios.get(`${BASE_URL}/videos`, { params });
+}
+
+function fetchRecommendedVideosApi() {
+  return axios.get(`${BASE_URL}/videos`, {
+    params: {
+      part: "snippet,contentDetails,statistics",
+      chart: "mostPopular",
+      regionCode: "VN",
+      maxResults: 12,
+      key: API_KEY,
+    },
+  });
 }
 
 function* fetchVideos(action) {
@@ -30,6 +43,10 @@ function* fetchVideos(action) {
 
     const response = yield call(fetchVideosApi, params);
     yield put(fetchVideosSuccess(response.data.items));
+    const recommendedVideosResponse = yield call(fetchRecommendedVideosApi);
+    yield put(
+      fetchRecommendedVideosSuccess(recommendedVideosResponse.data.items)
+    );
   } catch (error) {
     yield put(fetchVideosFailure(error.message));
   }

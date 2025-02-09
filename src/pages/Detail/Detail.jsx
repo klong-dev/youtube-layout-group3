@@ -14,7 +14,9 @@ import { Link, useParams } from "react-router";
 
 function Detail() {
   const dispatch = useDispatch();
-  const { videos, loading, error } = useSelector((state) => state.videos);
+  const { videos, recommendedVideos, loading, error } = useSelector(
+    (state) => state.videos
+  );
   const [video, setVideo] = useState(null);
   const [showFull, setShowFull] = useState(false);
   const contentRef = useRef(null);
@@ -383,10 +385,10 @@ function Detail() {
         )}
       </div>
       <div className="w-[25rem] flex flex-col gap-4">
-        {videos.map((item) => (
+        {recommendedVideos.map((item) => (
           <Link
-            key={item.id.videoId}
-            to={`/video/${item.id.videoId}`}
+            key={item.id}
+            to={`/video/${item.id}`}
             className="flex items-start gap-3 text-white hover:bg-[#2e2e2e] p-2 rounded-lg transition"
           >
             <div className="relative w-[160px] h-[90px] rounded-lg overflow-hidden">
@@ -408,7 +410,7 @@ function Detail() {
                 {item.snippet.channelTitle}
               </p>
               <p className="text-gray-400 text-xs">
-                1.5M views • 11 months ago
+                {item.statistics.viewCount / 1000000}M views 11 months ago
               </p>
             </div>
           </Link>
