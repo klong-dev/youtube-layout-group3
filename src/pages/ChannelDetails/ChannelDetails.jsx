@@ -147,7 +147,7 @@ const ChannelDetails = () => {
                     />
                     <div className="channelDetails_danhChoBan_videoList_card_info">
                       <div className="channelDetails_danhChoBan_videoList_card_info_title flex mt-[10px]">
-                        <p className="text-white  overflow-hidden text-ellipsis whitespace-nowrap">
+                        <p className="text-white  line-clamp-2">
                           {video.title}
                         </p>
                         <BsThreeDotsVertical className="text-white w-[100px]" />
