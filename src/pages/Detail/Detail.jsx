@@ -11,12 +11,19 @@ import { Input } from "antd";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
 import { Link, useParams } from "react-router";
+import { formatView } from "@/utils/format";
 
 function Detail() {
   const dispatch = useDispatch();
-  const { videos, recommendedVideos, loading, error } = useSelector(
-    (state) => state.videos
+  const {
+    videos = [],
+    recommendedVideos = [],
+    loading,
+    error,
+  } = useSelector(
+    (state) => state.videos || { videos: [], recommendedVideos: [] }
   );
+  const [history, setHistory] = useState([]);
   const [video, setVideo] = useState(null);
   const [showFull, setShowFull] = useState(false);
   const contentRef = useRef(null);
@@ -58,6 +65,10 @@ function Detail() {
       );
     }
   }, [video]);
+
+  useEffect(() => {
+    console.log("history:", history);
+  }, [history]);
 
   if (loading) return <p>Đang tải...</p>;
   if (error) return <p className="text-red-500">Lỗi: {error}</p>;
@@ -121,6 +132,16 @@ function Detail() {
     setEdit(false);
     setComment(true);
     setUpdate(true);
+  };
+
+  const handleHistory = (video) => {
+    setHistory((prevHistory) => {
+      let updatedHistory = prevHistory.filter((item) => item.id !== video.id);
+      updatedHistory.unshift(video);
+
+      localStorage.setItem("watchedVideos", JSON.stringify(updatedHistory));
+      return updatedHistory;
+    });
   };
 
   return (
@@ -197,7 +218,7 @@ function Detail() {
         <div className="flex gap-5 mt-5">
           <div className="bg-[#2C2C2C] w-full h-auto rounded-2xl text-white px-5 py-3">
             <div className="flex gap-4 font-bold">
-              <p>{video?.statistics?.viewCount} lượt xem</p>
+              <p>{formatView(video?.statistics?.viewCount)}</p>
               <p>10 tháng trước</p>
             </div>
             <div
@@ -259,6 +280,7 @@ function Detail() {
             placeholder="Viết bình luận ..."
             onChange={handleSearch}
             value={write}
+            className="border-none border-b border-gray-300 rounded-none shadow-none ml-5 h-[50px] focus:ring-0 focus:outline-none"
           ></Input>
         </div>
 
@@ -316,7 +338,9 @@ function Detail() {
             <div className="flex gap-3">
               <img
                 className="self-start"
-                src="https://tse1.mm.bing.net/th?id=OIP.VDIiQb2aRk06gZOi67vCcQHaHo&pid=Api&P=0&h=220"
+                src={
+                  "https://tse1.mm.bing.net/th?id=OIP.VDIiQb2aRk06gZOi67vCcQHaHo&pid=Api&P=0&h=220"
+                }
                 width={50}
                 height={50}
                 style={{ borderRadius: "50%" }}
@@ -358,7 +382,7 @@ function Detail() {
             onBlur={() => setEdit(false)}
           >
             <div></div>
-            <div className="flex flex-col px-5 py-2 rounded-2xl bg-[#2C2C2C] text-white relative top-[20px]">
+            <div className="flex flex-col px-5 py-2 rounded-2xl bg-[#2C2C2C] text-white relative top-[20px] right-10 z-30">
               <button
                 onClick={handleUpdate}
                 type="secondary"
@@ -390,6 +414,7 @@ function Detail() {
             key={item.id}
             to={`/video/${item.id}`}
             className="flex items-start gap-3 text-white hover:bg-[#2e2e2e] p-2 rounded-lg transition"
+            onClick={() => handleHistory(item)}
           >
             <div className="relative w-[160px] h-[90px] rounded-lg overflow-hidden">
               <img
@@ -410,7 +435,7 @@ function Detail() {
                 {item.snippet.channelTitle}
               </p>
               <p className="text-gray-400 text-xs">
-                {item.statistics.viewCount / 1000000}M views
+                {formatView(item.statistics.viewCount)}
               </p>
               <p className="text-gray-400 text-xs">
                 {video.snippet.publishedAt}
