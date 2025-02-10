@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Grid2, Box } from "@mui/material";
 import VideoCard from "./VideoCard"; // VideoCard component for individual videos
 

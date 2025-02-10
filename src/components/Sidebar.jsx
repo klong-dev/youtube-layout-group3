@@ -1,8 +1,9 @@
 import items from "@/mocks/sidebar.json";
+import { useNavigate } from "react-router";
 
 export const Sidebar = () => {
   const isExpanded = true;
-
+  const navigate = useNavigate();
   return (
     <>
       <div
@@ -16,6 +17,8 @@ export const Sidebar = () => {
             className={`${!isExpanded && "flex-col gap-0"} flex ${
               isExpanded && "md:flex-col lg:flex-row lg:gap-4 md:gap-1"
             } items-center text-white lg:h-[48px]`}
+            onClick={() => navigate("/history")}
+            style={{ cursor: "pointer" }}
           >
             <div dangerouslySetInnerHTML={{ __html: item.icon }} />
             <span className="text-sm md:text-xs lg:text-sm line-clamp-1">
