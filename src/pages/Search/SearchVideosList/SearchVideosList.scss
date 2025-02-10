@@ -1,0 +1,93 @@
+.searchResultVideoList_wrap {
+  margin-left: 270px;
+  &.active {
+    margin-left: 40px;
+    margin-top: 80px;
+  }
+}
+
+.searchResultVideoList {
+  margin-top: 30px;
+}
+
+.card {
+  display: flex;
+  margin-top: 20px;
+}
+
+.searchRsVideoList_img_wrap {
+  // background-color: blue;
+  width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.card_img {
+  cursor: pointer;
+  width: 500px;
+  height: 280px;
+  border-radius: 13px;
+  max-width: 500px;
+}
+
+.card_img_channel {
+  border-radius: 100px;
+  height: 136px;
+  width: 136px;
+}
+
+.card_info_wrap {
+  margin-left: 15px;
+}
+
+.card_info {
+  cursor: pointer;
+
+  p {
+    margin: 0px;
+    font-family: "Roboto", Arial, sans-serif;
+  }
+}
+
+.card_info_title {
+  p {
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+  }
+}
+
+.card_info_view {
+  margin-top: 5px;
+  p {
+    color: rgba(255, 255, 255, 0.636);
+    font-size: 12.5px;
+  }
+}
+
+.card_info_channel {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+  img {
+    height: 24px;
+    width: 24px;
+    margin-right: 7px;
+  }
+  p {
+    color: rgba(255, 255, 255, 0.636);
+    font-size: 12.5px;
+  }
+}
+
+.card_info_description {
+  p {
+    color: rgba(255, 255, 255, 0.636);
+    font-size: 12.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header/Header";
-import { Sidebar } from "@/components/Sidebar";
+import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { Outlet } from "react-router";
 
 function RootLayout() {
@@ -9,7 +9,7 @@ function RootLayout() {
       <div className="container pt-4">
         <div>
           <Sidebar />
-          <div className="lg:ml-[140px] md:ml-[60px]">
+          <div className="ml-[220px]">
             <Outlet />
           </div>
         </div>

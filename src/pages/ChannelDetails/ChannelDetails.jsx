@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchChannelDetailsRequest } from "@/redux/channelDetails/actions";
+// import { fetchChannelDetailsRequest } from "@/redux/channelDetails/actions";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
+import { fetchChannelDetailsRequest } from "../../redux/channelDetails/channelSlice";
+import { useParams } from "react-router";
+// import ForYou from "./forYou/ForYou";
 
 const ChannelDetails = () => {
   const dispatch = useDispatch();
-  const { channelDetails, loading, error } = useSelector((state) => state);
+  const param = useParams();
+  console.log("param ", param);
+  const { channelDetails, loading, error } = useSelector(
+    (state) => state.channel
+  );
   const [showComponent, setShowComponent] = useState(false);
 
   const formatNumber = (number) => {
@@ -45,13 +52,13 @@ const ChannelDetails = () => {
     // Set timeout để delay 3 giây
     const timer = setTimeout(() => {
       setShowComponent(true); // Sau 3 giây thì thay đổi trạng thái để hiển thị component
-    }, 1500);
+    }, 1000);
 
     return () => clearTimeout(timer); // Dọn dẹp timer khi component bị unmount
   }, []);
 
   useEffect(() => {
-    dispatch(fetchChannelDetailsRequest("UC8YW6FO4bJzh8IKJl3PtZqw"));
+    dispatch(fetchChannelDetailsRequest(param.channelId));
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
@@ -60,14 +67,15 @@ const ChannelDetails = () => {
   console.log("Day la channel details: ", channelDetails);
 
   return (
-    <div className="channelDetails_wrap flex w-full mr-[15px]">
+    <div className="channelDetails_wrap flex w-full mr-[15px] mt-[70px]">
       {showComponent && (
-        <div className="channelDetails ml-auto  w-[1290px]">
+        <div className="channelDetails ml-auto w-[1290px] mt-[7,0px]">
+          {/* channel details info */}
           <div className="channelDetails_channelInfo">
             <div className="channelDetails_channelInfo_banner ml-[110px]">
               <img
-                className="w-[1070px] h-[172px] rounded-2xl"
-                src={channelDetails.banner}
+                className="w-[1070px] h-[172px] rounded-2xl object-cover"
+                src={channelDetails?.banner}
               />
             </div>
             <div className="channelDetails_channelInfo_avatar_content flex  mt-[20px]">
@@ -104,7 +112,7 @@ const ChannelDetails = () => {
               </div>
             </div>
           </div>
-
+          {/* option */}
           <div className="channelDetails_options text-[16px] font-medium text-[rgb(170,170,170)] pl-[110px] mt-[30px] flex gap-[25px]">
             <div className="cursor-pointer pb-[10px] border-b-3 border-b-black hover:border-b-[rgb(170,170,170)]">
               Trang Chủ
@@ -128,40 +136,54 @@ const ChannelDetails = () => {
               <HiMagnifyingGlass className="cursor-pointer w-[24px] h-[24px]" />
             </div>
           </div>
-          <div className="border-b border-b-[rgb(170,170,170)]"></div>
-
-          <div className="channelDetails_danhChoBan ml-[110px]">
-            <div className=" mt-[17px] mb-[17px]">
-              <p className="text-white text-[20px] font-bold">Dành cho bạn</p>
-            </div>
-            <div className="channelDetails_danhChoBan_videoList flex">
-              <Carousel className="w-[1080px]" responsive={responsive}>
-                {channelDetails.videos.map((video) => (
-                  <div
-                    className="channelDetails_danhChoBan_videoList_card"
-                    key={video.videoId}
-                  >
-                    <img
-                      className="w-[354px] h-[198px] rounded-2xl"
-                      src={video.thumbnail}
-                    />
-                    <div className="channelDetails_danhChoBan_videoList_card_info">
-                      <div className="channelDetails_danhChoBan_videoList_card_info_title flex mt-[10px]">
-                        <p className="text-white  overflow-hidden text-ellipsis whitespace-nowrap">
-                          {video.title}
-                        </p>
-                        <BsThreeDotsVertical className="text-white w-[100px]" />
-                      </div>
-                      <div className="channelDetails_danhChoBan_videoList_card_info_view mt-[5px]">
-                        <p className="text-[rgb(170,170,170)] text-[12px]">
-                          {formatNumber(video.viewCount)} lượt xem
-                        </p>
-                      </div>
+          <div className="ml-[50px] border-b border-b-[rgba(170,170,170,0.4)]"></div>
+          {/* Danh cho ban */}
+          {/* <ForYou channelDetails={channelDetails} /> */}
+          {/* Danh sach phat o trang channel details */}
+          <div className="channelDetails_playlist ">
+            {channelDetails.playlists.map((playlist) => (
+              <div key={playlist.playlistId}>
+                {playlist.videos.length > 1 && (
+                  <div>
+                    <div className="ml-[110px] mt-[17px] mb-[17px]">
+                      <p className="text-white text-[20px] font-bold">
+                        {playlist.title}
+                      </p>
                     </div>
+                    <div>
+                      <Carousel
+                        className="ml-[110px] w-[1080px]"
+                        responsive={responsive}
+                      >
+                        {playlist.videos.map((video) => (
+                          <div key={video.videoId}>
+                            <img
+                              className="rounded-2xl w-[354px] h-[198px]"
+                              src={video.thumbnail}
+                            />
+                            <div className="channelDetails_playlist_videoList_card_info">
+                              <div className="channelDetails_playlist_videoList_card_info_title flex mt-[10px]">
+                                <p className="text-white  line-clamp-2">
+                                  {video.title}
+                                </p>
+                                <BsThreeDotsVertical className="text-white w-[100px]" />
+                              </div>
+                              <div className="channelDetails_playlist_videoList_card_info_view mt-[5px]">
+                                <p className="text-[rgb(170,170,170)] text-[12px]">
+                                  {formatNumber(video.viewCount)} lượt xem
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </Carousel>
+                      ;
+                    </div>
+                    <div className="ml-[50px] mt-[20px] border-b border-b-[rgba(170,170,170,0.4)]"></div>
                   </div>
-                ))}
-              </Carousel>
-            </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       )}
