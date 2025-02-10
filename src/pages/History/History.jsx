@@ -1,8 +1,11 @@
 import { IoSettingsOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
-import { TfiTrash } from "react-icons/tfi";
+import { TfiTrash, TfiDownload } from "react-icons/tfi";
 import { HiOutlinePause } from "react-icons/hi2";
 import { FiX, FiMoreVertical } from "react-icons/fi";
+import { RiPlayList2Fill } from "react-icons/ri";
+import { BsClock } from "react-icons/bs";
+import { PiBookmarkSimple, PiShareFat } from "react-icons/pi";
 import { useEffect, useState } from "react";
 import {
   clearWatchedVideos,
@@ -96,20 +99,25 @@ function HistoryPage() {
                         {menuOpen === video.id && (
                           <div className="absolute right-0 top-10 bg-white shadow-lg rounded-md w-48 z-10 py-2.5">
                             <ul className="text-sm text-gray-700">
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                Add to queue
+                              <li className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                <RiPlayList2Fill className="text-gray-700" />
+                                <span>Add to queue</span>
                               </li>
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                Save to Watch Later
+                              <li className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                <BsClock className="text-gray-700" />
+                                <span>Save to Watch Later</span>
                               </li>
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                Save to playlist
+                              <li className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                <PiBookmarkSimple className="text-gray-700" />
+                                <span>Save to playlist</span>
                               </li>
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                Download
+                              <li className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                <TfiDownload className="text-gray-700" />
+                                <span>Download</span>
                               </li>
-                              <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">
-                                Share
+                              <li className="flex items-center space-x-2 px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                                <PiShareFat className="text-gray-700" />
+                                <span>Share</span>
                               </li>
                             </ul>
                           </div>
