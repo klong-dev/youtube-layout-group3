@@ -1,0 +1,92 @@
+[
+    {
+      "videoUrl": "https://youtube.com/watch?v=dQw4w9WgXcQ",
+      "title": "ReactJS Tutorial for Beginners",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "CodeWithMe",
+      "channelUrl": "https://youtube.com/@codewithme",
+      "statistics": {
+        "viewCount": 1200000
+      }
+    },
+    {
+      "videoUrl": "https://youtube.com/watch?v=xVf4Zk8CBj0",
+      "title": "Understanding TypeScript in 10 Minutes",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "Tech Explained",
+      "channelUrl": "https://youtube.com/@techexplained",
+      "statistics": {
+        "viewCount": 850000
+      }
+    },
+    {
+      "videoUrl": "https://youtube.com/watch?v=kJQP7kiw5Fk",
+      "title": "Mastering JavaScript Closures",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "JS Mastery",
+      "channelUrl": "https://youtube.com/@jsmastery",
+      "statistics": {
+        "viewCount": 640000
+      }
+    },
+    {
+      "videoUrl": "https://youtube.com/watch?v=JGwWNGJdvx8",
+      "title": "CSS Grid vs Flexbox - Which One to Use?",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "Design With Code",
+      "channelUrl": "https://youtube.com/@designwithcode",
+      "statistics": {
+        "viewCount": 720000
+      }
+    },
+    {
+      "videoUrl": "https://youtube.com/watch?v=V1bFr2SWP1I",
+      "title": "Deploying a Full Stack App with Vercel",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "DevOps Simplified",
+      "channelUrl": "https://youtube.com/@devopssimplified",
+      "statistics": {
+        "viewCount": 950000
+      }
+    },
+    {
+      "videoUrl": "https://youtube.com/watch?v=9bZkp7q19f0",
+      "title": "GraphQL vs REST API - What's the Difference?",
+      "thumbnail": {
+        "high": {
+          "url": "/api/placeholder/1280/720"
+        }
+      },
+      "channelImage": "/api/placeholder/88/88",
+      "channelTitle": "API Academy",
+      "channelUrl": "https://youtube.com/@apiacademy",
+      "statistics": {
+        "viewCount": 510000
+      }
+    }
+  ]

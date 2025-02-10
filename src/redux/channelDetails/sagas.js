@@ -146,6 +146,7 @@ function* fetchChannelDetails(action) {
       axios.get,
       `${apiUrl}/channels?part=snippet,statistics,brandingSettings&id=${channelId}&key=${apiKey}`
     );
+    console.log("banner ", channelResponse);
 
     if (!channelResponse.data.items) {
       throw new Error("Không tìm thấy kênh hoặc phản hồi API không hợp lệ");
@@ -173,16 +174,46 @@ function* fetchChannelDetails(action) {
     // 🔹 Gọi API để lấy playlist của kênh
     const playlistResponse = yield call(
       axios.get,
-      `${apiUrl}/playlistItems?part=snippet&id=${channelId}&maxResults=5&key=${apiKey}`
+      `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channelId}&maxResults=5&key=${apiKey}`
     );
-    console.log("Day la playlist: ", playlistResponse);
+    console.log("Day la playlistResponse: ", playlistResponse.data);
     if (playlistResponse.data.items) {
       const playlists = playlistResponse.data.items.map((playlist) => ({
         playlistId: playlist.id,
         title: playlist.snippet.title,
         description: playlist.snippet.description,
         thumbnail: playlist.snippet.thumbnails.default.url,
+        videos: [],
       }));
+
+      // channelDetails.playlists = playlists;
+      for (const playlist of playlists) {
+        try {
+          const videoResponse = yield call(
+            axios.get,
+            `https://www.googleapis.com/youtube/v3/playlistItems`,
+            {
+              params: {
+                part: "snippet",
+                playlistId: playlist.playlistId,
+                maxResults: 10, // Lấy tối đa 10 video trong playlist
+                key: apiKey,
+              },
+            }
+          );
+          console.log("Day la video response: ", videoResponse.data);
+          if (videoResponse.data.items) {
+            playlist.videos = videoResponse.data.items.map((item) => ({
+              videoId: item.snippet.resourceId.videoId,
+              title: item.snippet.title,
+              thumbnail: item.snippet.thumbnails.medium.url,
+              publishedAt: item.snippet.publishedAt,
+            }));
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
       channelDetails.playlists = playlists;
     }
 
