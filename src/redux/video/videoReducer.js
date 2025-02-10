@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import videos from "./videoSlice.jsx";
+import videos from "@/redux/video/videoSlice";
 
 const rootReducer = combineReducers({
   videos,

@@ -4,10 +4,10 @@ import {
   fetchVideosSuccess,
   fetchVideosFailure,
   fetchRecommendedVideosSuccess,
-} from "./reducers/videoSlice.jsx";
+} from "@/redux/video/videoSlice";
 
 const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE_URL = "https://www.googleapis.com/youtube/v3";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function fetchVideosApi(params) {
   return axios.get(`${BASE_URL}/videos`, { params });
