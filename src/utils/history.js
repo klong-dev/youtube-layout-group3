@@ -26,3 +26,13 @@ export const groupByDate = (videos) => {
     return a;
   }, {});
 };
+
+export const deleteWatchedVideo = (videoId) => {
+  let watchedVideos = JSON.parse(localStorage.getItem("watchedVideos")) || [];
+  watchedVideos = watchedVideos.filter((video) => video.id !== videoId);
+  localStorage.setItem("watchedVideos", JSON.stringify(watchedVideos));
+};
+
+export const clearWatchedVideos = () => {
+  localStorage.removeItem("watchedVideos");
+};

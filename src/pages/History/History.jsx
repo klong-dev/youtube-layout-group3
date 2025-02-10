@@ -4,11 +4,26 @@ import { TfiTrash } from "react-icons/tfi";
 import { HiOutlinePause } from "react-icons/hi2";
 import { FiX, FiMoreVertical } from "react-icons/fi";
 import { useEffect, useState } from "react";
-import { getWatchedVideos, groupByDate } from "../../utils/history";
+import {
+  clearWatchedVideos,
+  deleteWatchedVideo,
+  getWatchedVideos,
+  groupByDate,
+} from "../../utils/history";
 
 function HistoryPage() {
   const [watchedVideos, setWatchedVideos] = useState([]);
   const [menuOpen, setMenuOpen] = useState(null);
+
+  const handleDeleteVideo = (videoId) => {
+    deleteWatchedVideo(videoId);
+    setWatchedVideos(getWatchedVideos());
+  };
+
+  const handleClearHistory = () => {
+    clearWatchedVideos();
+    setWatchedVideos([]);
+  };
 
   useEffect(() => {
     setWatchedVideos(getWatchedVideos());
@@ -53,7 +68,10 @@ function HistoryPage() {
                             {video.title}
                           </h3>
                           <div className="flex items-center space-x-2">
-                            <button className="text-gray-500 hover:text-gray-600 transition-colors text-2xl font-bold p-2 rounded-full hover:bg-gray-200 cursor-pointer relative group">
+                            <button
+                              className="text-gray-500 hover:text-gray-600 transition-colors text-2xl font-bold p-2 rounded-full hover:bg-gray-200 cursor-pointer relative group"
+                              onClick={() => handleDeleteVideo(video.id)}
+                            >
                               <FiX />
                               <span className="absolute left-1/2 transform -translate-x-1/2 top-14 w-35 bg-gray-500 text-gray-700 text-sm rounded-md py-2 px-3 opacity-0 group-hover:opacity-80 transition-opacity text-left">
                                 Remove from
@@ -117,7 +135,10 @@ function HistoryPage() {
           </div>
 
           <ul className="space-y-4 text-sm">
-            <li className="flex items-center space-x-2 cursor-pointer font-semibold p-2 rounded-full hover:bg-gray-300 transition">
+            <li
+              className="flex items-center space-x-2 cursor-pointer font-semibold p-2 rounded-full hover:bg-gray-300 transition"
+              onClick={handleClearHistory}
+            >
               <TfiTrash className="text-gray-600 text-xl" />
               <span>Clear all watch history</span>
             </li>
