@@ -8,12 +8,12 @@ import micIcon from "@/assets/images/74ce14befb22695743659cf8a8290c2b.png";
 import { AiOutlineMore } from "react-icons/ai";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export const Header = ({ isActive, setIsActive }) => {
   const [search, setSearch] = useState("");
-  const dispatch = useDispatch();
   const { videos, loading, error } = useSelector((state) => state);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,8 +21,9 @@ export const Header = ({ isActive, setIsActive }) => {
   };
 
   const handleSearch = () => {
-    // dispatch(fetchVideosRequest(search));
     if (search || search.trim) {
+      dispatch(fetchVideosRequest(search));
+
       navigate(`/results?search_query=${encodeURIComponent(search)}`);
     }
   };
@@ -32,10 +33,6 @@ export const Header = ({ isActive, setIsActive }) => {
       handleSearch();
     }
   };
-
-  // useEffect(() => {
-  //   dispatch(fetchVideosRequest("nhac tet viet nam"));
-  // }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -77,7 +74,7 @@ export const Header = ({ isActive, setIsActive }) => {
             </div>
           </div>
           <div type="submit" className="icon_wrap_2">
-            <PiMagnifyingGlassLight className="icon_kinhLup_2" />
+            {/* <PiMagnifyingGlassLight className="icon_kinhLup_2" /> */}
           </div>
         </div>
         <div className="micIcon_wrap">

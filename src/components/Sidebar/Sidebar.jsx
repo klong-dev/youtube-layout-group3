@@ -17,9 +17,11 @@ import { MdHelpOutline } from "react-icons/md";
 import { RiFeedbackLine } from "react-icons/ri";
 import { FaRegCopyright } from "react-icons/fa6";
 import YtbKids from "../../assets/images/ytbKids.webp";
+import { useNavigate } from "react-router";
 
 export const Sidebar = () => {
   const isExpanded = true;
+  const navigate = useNavigate();
 
   return (
     <>
@@ -28,7 +30,12 @@ export const Sidebar = () => {
           <div className={`navbar ${isExpanded ? "" : "collapsed"}`}>
             {/* block 1 */}
             <div className="block_1_wrap">
-              <div className="block_1">
+              <div
+                onClick={() => {
+                  navigate("/");
+                }}
+                className="block_1"
+              >
                 <div className="block_1_icon_wrap">
                   <MdHome className="block_1_icon" />
                 </div>

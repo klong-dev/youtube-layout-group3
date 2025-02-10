@@ -6,10 +6,11 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { fetchChannelDetailsRequest } from "../../redux/channelDetails/channelSlice";
-import { useParams } from "react-router";
-// import ForYou from "./forYou/ForYou";
+import { useNavigate, useParams } from "react-router";
+import ForYou from "./forYou/ForYou";
 
 const ChannelDetails = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const param = useParams();
   console.log("param ", param);
@@ -138,7 +139,7 @@ const ChannelDetails = () => {
           </div>
           <div className="ml-[50px] border-b border-b-[rgba(170,170,170,0.4)]"></div>
           {/* Danh cho ban */}
-          {/* <ForYou channelDetails={channelDetails} /> */}
+          <ForYou channelDetails={channelDetails} />
           {/* Danh sach phat o trang channel details */}
           <div className="channelDetails_playlist ">
             {channelDetails.playlists.map((playlist) => (
@@ -156,7 +157,12 @@ const ChannelDetails = () => {
                         responsive={responsive}
                       >
                         {playlist.videos.map((video) => (
-                          <div key={video.videoId}>
+                          <div
+                            onClick={() => {
+                              navigate(`/video/${video.videoId}`);
+                            }}
+                            key={video.videoId}
+                          >
                             <img
                               className="rounded-2xl w-[354px] h-[198px]"
                               src={video.thumbnail}

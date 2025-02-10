@@ -17,7 +17,7 @@ const channelSlice = createSlice({
       state.loading = true;
     },
     fetchVideosSuccess: (state, action) => {
-      state.videos = [...state.videos, ...action.payload];
+      state.videos = action.payload; // Ghi đè danh sách video thay vì nối mảng
       state.loading = false;
     },
     fetchVideosFailure: (state, action) => {
