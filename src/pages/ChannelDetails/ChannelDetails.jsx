@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchChannelDetailsRequest } from "@/redux/channelDetails/actions";
+// import { fetchChannelDetailsRequest } from "@/redux/channelDetails/actions";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import ForYou from "./forYou/ForYou";
+import { fetchChannelDetailsRequest } from "../../redux/channelDetails/channelSlice";
+import { useParams } from "react-router";
+// import ForYou from "./forYou/ForYou";
 
 const ChannelDetails = () => {
   const dispatch = useDispatch();
-  const { channelDetails, loading, error } = useSelector((state) => state);
+  const param = useParams();
+  console.log("param ", param);
+  const { channelDetails, loading, error } = useSelector(
+    (state) => state.channel
+  );
   const [showComponent, setShowComponent] = useState(false);
 
   const formatNumber = (number) => {
@@ -46,13 +52,13 @@ const ChannelDetails = () => {
     // Set timeout để delay 3 giây
     const timer = setTimeout(() => {
       setShowComponent(true); // Sau 3 giây thì thay đổi trạng thái để hiển thị component
-    }, 3000);
+    }, 1000);
 
     return () => clearTimeout(timer); // Dọn dẹp timer khi component bị unmount
   }, []);
 
   useEffect(() => {
-    dispatch(fetchChannelDetailsRequest("UC8YW6FO4bJzh8IKJl3PtZqw"));
+    dispatch(fetchChannelDetailsRequest(param.channelId));
   }, [dispatch]);
 
   if (loading) return <div>Loading...</div>;
@@ -69,7 +75,7 @@ const ChannelDetails = () => {
             <div className="channelDetails_channelInfo_banner ml-[110px]">
               <img
                 className="w-[1070px] h-[172px] rounded-2xl object-cover"
-                src={channelDetails.banner}
+                src={channelDetails?.banner}
               />
             </div>
             <div className="channelDetails_channelInfo_avatar_content flex  mt-[20px]">
@@ -132,7 +138,7 @@ const ChannelDetails = () => {
           </div>
           <div className="ml-[50px] border-b border-b-[rgba(170,170,170,0.4)]"></div>
           {/* Danh cho ban */}
-          <ForYou channelDetails={channelDetails} />
+          {/* <ForYou channelDetails={channelDetails} /> */}
           {/* Danh sach phat o trang channel details */}
           <div className="channelDetails_playlist ">
             {channelDetails.playlists.map((playlist) => (

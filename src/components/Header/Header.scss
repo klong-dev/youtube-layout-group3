@@ -1,0 +1,281 @@
+.header {
+  width: 98%;
+  background-color: #0f0f0f;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 16px;
+  position: fixed;
+}
+
+// --------------LOGO------------------
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.baqueIcon {
+  color: rgb(255, 255, 255);
+  height: auto;
+  width: 36px;
+  padding: 8px;
+}
+
+.logoImage {
+  height: auto;
+  width: 123px;
+  color: white;
+  padding: 18px 14px 18px 16px;
+  z-index: 100;
+}
+
+.baqueIcon_wrap {
+  height: 40px;
+  width: 40px;
+}
+
+.baqueIcon_wrap:hover {
+  background-color: rgb(34, 34, 34);
+  border-radius: 50px;
+}
+
+// -----------Search Bar---------------
+.search_wrap {
+  display: flex;
+  position: absolute;
+  left: 978px;
+}
+
+.searchBar_wrap {
+  display: flex;
+  justify-content: right;
+  position: relative;
+  input {
+    position: absolute;
+    right: 64px;
+    height: 38.4px;
+    width: 516px;
+    padding: 0px 4px 0px 16px;
+    outline: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    background-color: rgb(18, 18, 18);
+    border-top: 0.8px solid rgb(48, 48, 48);
+    border-bottom: 0.8px solid rgb(48, 48, 48);
+    border-left: 0.8px solid rgb(48, 48, 48);
+    border-right: 0px;
+    font-size: 16px;
+    font-family: "Roboto", Arial, sans-serif;
+    color: white;
+  }
+  input:focus {
+    padding-left: 50px;
+    border-top: 0.8px solid rgb(28, 98, 185);
+    border-bottom: 0.8px solid rgb(28, 98, 185);
+    border-left: 0.8px solid rgb(28, 98, 185);
+    border-right: 0.8px solid rgb(28, 98, 185);
+  }
+}
+
+.searchBar_wrap:focus-within .icon_wrap_2 {
+  visibility: visible;
+}
+
+.icon_wrap_1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.08);
+  height: 40px;
+  width: 64px;
+  border: 0.8px solid rgb(48, 48, 48);
+  height: 40px;
+  padding: 0px;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  cursor: pointer;
+}
+
+.icon_kinhLup_1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  height: 24px;
+  width: 24px;
+}
+
+.icon_wrap_2 {
+  position: absolute;
+  visibility: hidden;
+  right: 593px;
+  top: 9.5px;
+}
+
+.icon_kinhLup_2 {
+  color: white;
+  height: 21px;
+  width: 21px;
+}
+
+.micIcon_wrap {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  background-color: rgba(255, 255, 255, 0.103);
+  margin-left: 16px;
+  border-radius: 50px;
+  // transition: 0.1s ease;
+}
+
+.micIcon {
+  color: white;
+  height: 24px;
+  width: 28px;
+}
+
+.icon_wrap_1_wrap {
+  position: relative;
+}
+
+.icon1_tooltip {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  color: rgba(255, 255, 255, 0.625);
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 12px;
+  border: 0.5px solid rgba(255, 255, 255, 0.625);
+  height: 21px;
+  width: 55px;
+  top: 45px;
+  left: 2px;
+  visibility: hidden;
+  p {
+    margin: 0px;
+  }
+}
+
+.icon_wrap_1_wrap:hover {
+  .icon1_tooltip {
+    visibility: visible;
+    transition-delay: 0.3s;
+  }
+}
+
+.searchWithYourVoice {
+  display: flex;
+  visibility: hidden;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  position: absolute;
+  color: white;
+  width: 150px;
+  height: 30px;
+  font-size: 13px;
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #797979;
+  top: 50px;
+  // transition: 1s ease;
+}
+
+.micIcon_wrap:hover {
+  background-color: #6666667f;
+  .searchWithYourVoice {
+    visibility: visible;
+    // transition: 1s ease;
+  }
+}
+
+// ---------------account---------------------
+
+.account {
+  height: 40px;
+  width: 225px;
+  display: flex;
+}
+
+.setting_wrap {
+  display: flex;
+  justify-content: center;
+  margin-left: 78px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.setting {
+  color: white;
+  width: 24px;
+  height: 24px;
+}
+
+.signIn_wrap {
+  cursor: pointer;
+  margin-left: 20px;
+  border: 0.8px solid rgba(255, 255, 255, 0.23);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 7px;
+  width: 80px;
+  height: 34.4px;
+  border-radius: 50px;
+  position: relative;
+
+  p {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    margin: 0px;
+    color: white;
+  }
+}
+
+.signIn_icon_wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signIn_icon {
+  color: rgb(255, 255, 255);
+  height: 24px;
+  width: 24px;
+  margin-right: 6px;
+}
+
+.settings {
+  background-color: rgba(255, 255, 255, 0.208);
+  position: absolute;
+  top: 45px;
+  right: 120px;
+  border-radius: 5px;
+  padding: 0px 7px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-family: "Roboto", Arial, sans-serif;
+    font-size: 14px;
+    margin: 0px;
+    color: white;
+  }
+  visibility: hidden;
+}
+
+.setting_wrap:hover {
+  .settings {
+    visibility: visible;
+  }
+}
