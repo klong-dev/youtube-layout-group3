@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import { Home } from "../pages/Home/Home";
 import RootLayout from "../layouts/RootLayout";
 // import { NotFound } from "../pages/NotFound/NotFound";
+import { Shorts } from "../pages/Shorts/Shorts";
 import TrendingScreen from "../pages/TrendingScreen/TrendingScreen";
 import Detail from "../pages/Detail/Detail";
 import ChannelDetails from "../pages/ChannelDetails/ChannelDetails";
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: "", element: <Home /> },
+      { path: "shorts", element: <Shorts /> },
       { path: "/c/:channelId", element: <ChannelDetails /> },
       { path: "history", element: <HistoryPage /> },
       { path: "detail", element: <Detail /> },
