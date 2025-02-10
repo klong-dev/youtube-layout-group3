@@ -140,7 +140,7 @@ function Detail() {
             <img
               className="rounded-full"
               width={50}
-              src="https://tse1.mm.bing.net/th?id=OIP.VDIiQb2aRk06gZOi67vCcQHaHo&pid=Api&P=0&h=220"
+              src={video.snippet.thumbnails.default.url}
               alt=""
             />
             <div>
@@ -215,7 +215,7 @@ function Detail() {
               <img
                 className="rounded-full"
                 width={50}
-                src="https://tse1.mm.bing.net/th?id=OIP.VDIiQb2aRk06gZOi67vCcQHaHo&pid=Api&P=0&h=220"
+                src={video.snippet.thumbnails.default.url}
                 alt=""
               />
               <div>
@@ -410,7 +410,10 @@ function Detail() {
                 {item.snippet.channelTitle}
               </p>
               <p className="text-gray-400 text-xs">
-                {item.statistics.viewCount / 1000000}M views 11 months ago
+                {item.statistics.viewCount / 1000000}M views
+              </p>
+              <p className="text-gray-400 text-xs">
+                {video.snippet.publishedAt}
               </p>
             </div>
           </Link>
