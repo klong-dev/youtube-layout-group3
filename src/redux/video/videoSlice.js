@@ -22,7 +22,7 @@ const videoSlice = createSlice({
       state.loading = false;
     },
     fetchRecommendedVideosSuccess: (state, action) => {
-      state.recommendedVideos = action.payload; // Lưu danh sách video đề xuất
+      state.recommendedVideos = action.payload;
     },
   },
 });

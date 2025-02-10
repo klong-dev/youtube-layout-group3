@@ -1,4 +1,4 @@
-import { Header } from "@/components/Header";
+import { Header } from "@/components/Header/Header";
 import { Sidebar } from "@/components/Sidebar";
 import { Outlet } from "react-router";
 
@@ -7,9 +7,11 @@ function RootLayout() {
     <div className="flex flex-col bg-[#0f0f0f] min-h-svh">
       <Header />
       <div className="container pt-4">
-        <div className="">
+        <div>
           <Sidebar />
-          <Outlet />
+          <div className="lg:ml-[140px] md:ml-[60px]">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>
